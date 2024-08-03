@@ -1,0 +1,16 @@
+CREATE TABLE Soldados (id int(5) NOT NULL AUTO_INCREMENT, primer_nombre varchar(10) NOT NULL, segundo_nombre varchar(10), primer_apellido varchar(20) NOT NULL, segundo_apellido varchar(11), grado varchar(15) NOT NULL, id_compañia_compañias int(5) NOT NULL, id_cuerpo_cuerpos int(5) NOT NULL, id_cuartel_cuarteles int(5) NOT NULL, PRIMARY KEY (id));
+CREATE TABLE Cuarteles (id_cuartel int(5) NOT NULL AUTO_INCREMENT, nombre_cuartel varchar(10) NOT NULL, segundo_nombre_cuartel int(11), ubicacion_cuartel varchar(10) NOT NULL, ubicaciónid_ubicacion int(11) NOT NULL, PRIMARY KEY (id_cuartel));
+CREATE TABLE Cuerpos (id_cuerpo int(5) NOT NULL AUTO_INCREMENT, denominacion varchar(30) NOT NULL, PRIMARY KEY (id_cuerpo));
+CREATE TABLE Compañias (id_compañia int(5) NOT NULL AUTO_INCREMENT, actividad_compañias varchar(20) NOT NULL, PRIMARY KEY (id_compañia));
+CREATE TABLE Servicios (id_servicios int(5) NOT NULL AUTO_INCREMENT, actividad_servicios varchar(20) NOT NULL, PRIMARY KEY (id_servicios));
+CREATE TABLE Compañias_Cuarteles (id_cuartel_cuarteles int(5) NOT NULL, id_compañia_compañias int(5) NOT NULL, PRIMARY KEY (id_cuartel_cuarteles, id_compañia_compañias));
+CREATE TABLE Soldados_Servicios (id_soldados int(5) NOT NULL, id_servicios_servicios int(5) NOT NULL, fecha_realizacion date NOT NULL, PRIMARY KEY (id_soldados, id_servicios_servicios));
+CREATE TABLE ubicación (id_ubicacion int(11) NOT NULL AUTO_INCREMENT, pais varchar(11) NOT NULL, departamento varchar(11) NOT NULL, ciudad varchar(11) NOT NULL, direccion varchar(25) NOT NULL, PRIMARY KEY (id_ubicacion));
+ALTER TABLE Soldados ADD CONSTRAINT FKSoldados1 FOREIGN KEY (id_compañia_compañias) REFERENCES Compañias (id_compañia);
+ALTER TABLE Soldados ADD CONSTRAINT FKSoldados2 FOREIGN KEY (id_cuerpo_cuerpos) REFERENCES Cuerpos (id_cuerpo);
+ALTER TABLE Compañias_Cuarteles ADD CONSTRAINT FKCompañias1 FOREIGN KEY (id_cuartel_cuarteles) REFERENCES Compañias (id_compañia);
+ALTER TABLE Compañias_Cuarteles ADD CONSTRAINT FKCompañias2 FOREIGN KEY (id_compañia_compañias) REFERENCES Cuarteles (id_cuartel);
+ALTER TABLE Soldados ADD CONSTRAINT FKSoldados3 FOREIGN KEY (id_cuartel_cuarteles) REFERENCES Cuarteles (id_cuartel);
+ALTER TABLE Soldados_Servicios ADD CONSTRAINT FKSoldados4 FOREIGN KEY (id_soldados) REFERENCES Soldados (id);
+ALTER TABLE Soldados_Servicios ADD CONSTRAINT FKSoldados5 FOREIGN KEY (id_servicios_servicios) REFERENCES Servicios (id_servicios);
+ALTER TABLE Cuarteles ADD CONSTRAINT FKCuarteles1 FOREIGN KEY (ubicaciónid_ubicacion) REFERENCES ubicación (id_ubicacion);
